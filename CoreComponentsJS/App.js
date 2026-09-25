@@ -1,8 +1,12 @@
-import { View, Text,Image, ImageBackground, ScrollView,Button } from "react-native";
+import { View, Text,Image, ImageBackground, ScrollView,Button, Pressable, Modal } from "react-native";
+import { useState } from "react";
 
 const logoImg = require('./assets/icon.png')
 
 export default function App(){
+
+  const [isModalVisible,setIsModalVisible] = useState(false)
+
   return <View style={{flex:1 , backgroundColor:"plum", padding:60, }}>
     {/* <Image source={logoImg} style={{height:300,width:300}}/>
     <Image source={{uri: "https://picsum.photos/300"}} style={{height:300, width:300}}/>
@@ -18,5 +22,21 @@ export default function App(){
     </ScrollView>
 
     <Button title='Press' onPress={() => console.log("Button Pressed")} color="red"  disabled/>
+
+      <Pressable onPressOut={() => console.log("Image Pressed")}>
+        <Image source={logoImg} style={{height:300,width:300}}/>
+      </Pressable>
+
+      <Pressable onPressOut={() => console.log("Text Pressed")}>
+        <Text>This is a Text, which check with pressable component.</Text>
+      </Pressable>
+
+      <Button title="Open" onPress={() => setIsModalVisible(true)}/>
+
+
+      <Modal visible={isModalVisible} onRequestClose={() => setIsModalVisible(false)} animationType="fade" >
+        <Text style={{color:"red", backgroundColor:"White"}}>Modal Content</Text>
+        <Button title="Close" color="midnightblue" onPress={() => setIsModalVisible(false)}/>
+      </Modal>
   </View>
 }
