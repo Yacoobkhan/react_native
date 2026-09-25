@@ -1,5 +1,6 @@
-import { View, Text,Image, ImageBackground, ScrollView,Button, Pressable, Modal, StatusBar, ActivityIndicator} from "react-native";
+import { View, Text,Image, ImageBackground, ScrollView,Button, Pressable, Modal, StatusBar, ActivityIndicator, Alert} from "react-native";
 import { useState } from "react";
+import Greet from "./components/Greet";
 
 const logoImg = require('./assets/icon.png')
 
@@ -10,7 +11,7 @@ export default function App(){
 
   const [isIndicator, setIsIndicator] = useState(true);
 
-  return <View style={{flex:1 , backgroundColor:"plum", padding:60, }}>
+  return <View style={{flex:1 , backgroundColor:"plum", padding:100, }}>
 
     {/* <Image source={logoImg} style={{height:300,width:300}}/>
     <Image source={{uri: "https://picsum.photos/300"}} style={{height:300, width:300}}/>
@@ -43,28 +44,56 @@ export default function App(){
       {/* <Button title="Close" onPress={()=>setIsStatusBar(false)}/>
     
     </View> */}
-{/* 
-      <Button title="Open" onPress={() => setIsModalVisible(true)}/>
+
+      {/* <Button title="Open" onPress={() => setIsModalVisible(true)}/>
 
 
       <Modal visible={isModalVisible} onRequestClose={() => setIsModalVisible(false)} animationType="fade" >
-        <Text style={{color:"red", backgroundColor:"White"}}>Modal Content</Text>
+        <Text style={{color:"red"}}>Modal Content</Text>
         <Button title="Close" color="midnightblue" onPress={() => setIsModalVisible(false)}/>
-      </Modal> */}
+      </Modal>  */}
 
 
 
-      <ActivityIndicator />
+      {/* <ActivityIndicator />
 
-      <ActivityIndicator size="large"/>
+      <ActivityIndicator size="large"/> */}
 
-      <Button title="off" onPress={() => setIsIndicator(false)}/>
+      {/* <Button title="off" onPress={() => setIsIndicator(false)}/>
 
       <ActivityIndicator size="large" color="green" animating={isIndicator}/> 
 
       <Button title="on" onPress={()=>setIsIndicator(true)}/>
         
-      <ActivityIndicator size="large" color="red" animating={false}/>
+      <ActivityIndicator size="large" color="red" animating={false}/> */}
 
+
+{/* <View style={{marginBottom:20}}>
+      <Button title="Alert" onPress={() => Alert.alert("Invalid data!")}/>    
+</View>
+
+  <View style={{marginBottom:20}}>
+          <Button title="Alert 2" onPress={() => Alert.alert("Invalid data!","E-Mail is invalid")}/>
+  </View>
+
+        <Button 
+              title="Alert 3" 
+              onPress={() => Alert.alert("Invalid data!","E-Mail is invalid",[
+          {
+            text:'Cancel',
+            onPress:() => console.log("Cancel Pressed"),
+          },{
+            text:'ok',
+            onPress:() => console.log("OK Pressed"),
+          },
+        ]
+      )
+    }
+      />
+       */}
+
+
+    <Greet name="Yacoob" />
+    <Greet name="Khan" />
   </View>
 }
