@@ -1,4 +1,4 @@
-import { View, Text,Image, ImageBackground, ScrollView,Button, Pressable, Modal, StatusBar} from "react-native";
+import { View, Text,Image, ImageBackground, ScrollView,Button, Pressable, Modal, StatusBar, ActivityIndicator} from "react-native";
 import { useState } from "react";
 
 const logoImg = require('./assets/icon.png')
@@ -8,7 +8,10 @@ export default function App(){
   const [isModalVisible,setIsModalVisible] = useState(false)
   const [isStatusBar,setIsStatusBar] = useState(false)
 
+  const [isIndicator, setIsIndicator] = useState(true);
+
   return <View style={{flex:1 , backgroundColor:"plum", padding:60, }}>
+
     {/* <Image source={logoImg} style={{height:300,width:300}}/>
     <Image source={{uri: "https://picsum.photos/300"}} style={{height:300, width:300}}/>
     <Text><Text style={{color:"white"}}>Hello</Text> World</Text>  */}
@@ -31,22 +34,37 @@ export default function App(){
       <Pressable onPressOut={() => console.log("Text Pressed")}>
         <Text>This is a Text, which check with pressable component.</Text>
       </Pressable> */}
-      <View style={{marginBottom:20}}> 
+      {/* <View style={{marginBottom:20}}> 
         <View style={{marginBottom:20}}>
              <Button title="StatusBar" onPress={() => setIsStatusBar(true)}/>
-        </View>
+        </View> */}
       {/* <StatusBar backgroundColor="blue" barStyle="default" hidden={!isStatusBar}/> */}
 
-      <Button title="Close" onPress={()=>setIsStatusBar(false)}/>
+      {/* <Button title="Close" onPress={()=>setIsStatusBar(false)}/>
     
-    </View>
-
+    </View> */}
+{/* 
       <Button title="Open" onPress={() => setIsModalVisible(true)}/>
 
 
       <Modal visible={isModalVisible} onRequestClose={() => setIsModalVisible(false)} animationType="fade" >
         <Text style={{color:"red", backgroundColor:"White"}}>Modal Content</Text>
         <Button title="Close" color="midnightblue" onPress={() => setIsModalVisible(false)}/>
-      </Modal>
+      </Modal> */}
+
+
+
+      <ActivityIndicator />
+
+      <ActivityIndicator size="large"/>
+
+      <Button title="off" onPress={() => setIsIndicator(false)}/>
+
+      <ActivityIndicator size="large" color="green" animating={isIndicator}/> 
+
+      <Button title="on" onPress={()=>setIsIndicator(true)}/>
+        
+      <ActivityIndicator size="large" color="red" animating={false}/>
+
   </View>
 }
