@@ -1,4 +1,4 @@
-import { View, Text,Image, ImageBackground, ScrollView,Button, Pressable, Modal, StatusBar, ActivityIndicator, Alert} from "react-native";
+import { View, Text,Image, ImageBackground, ScrollView,Button, Pressable, Modal, StatusBar, ActivityIndicator, Alert, StyleSheet} from "react-native";
 import { useState } from "react";
 import Greet from "./components/Greet";
 
@@ -13,9 +13,15 @@ export default function App(){
 
   return <View style={{flex:1 , backgroundColor:"plum", padding:100, }}>
 
+    {/* IMAGE */}
+
     {/* <Image source={logoImg} style={{height:300,width:300}}/>
     <Image source={{uri: "https://picsum.photos/300"}} style={{height:300, width:300}}/>
     <Text><Text style={{color:"white"}}>Hello</Text> World</Text>  */}
+
+
+      {/* SCROLLVIEW */}
+
     {/* <ScrollView> */}
       {/* <ImageBackground source={logoImg} style={{flex:1}}> */}
       {/* <Image source={logoImg} style={{height:300,width:300}}/>
@@ -25,6 +31,8 @@ export default function App(){
         <Image source={logoImg} style={{height:300,width:300}}/> */}
       {/* </ImageBackground> */}
     {/* </ScrollView> */}
+
+    {/* BUTTON AND PRESSABLE */}
 
     {/* <Button title='Press' onPress={() => console.log("Button Pressed")} color="red"  disabled/>
 
@@ -45,13 +53,19 @@ export default function App(){
     
     </View> */}
 
-      {/* <Button title="Open" onPress={() => setIsModalVisible(true)}/>
+      {/* <Button title="Open" onPress={() => setIsModalVisible(true)}/> */}
 
 
-      <Modal visible={isModalVisible} onRequestClose={() => setIsModalVisible(false)} animationType="fade" >
-        <Text style={{color:"red"}}>Modal Content</Text>
-        <Button title="Close" color="midnightblue" onPress={() => setIsModalVisible(false)}/>
-      </Modal>  */}
+        {/* MODAL */}
+
+      {/*
+
+          <Modal visible={isModalVisible} onRequestClose={() => setIsModalVisible(false)} animationType="fade" >
+            <Text style={{color:"red"}}>Modal Content</Text>
+            <Button title="Close" color="midnightblue" onPress={() => setIsModalVisible(false)}/>
+          </Modal>  
+          
+      */}
 
 
 
@@ -93,7 +107,8 @@ export default function App(){
        */}
 
 
-    <Greet name="Yacoob" />
-    <Greet name="Khan" />
+    {/* <Greet name="Yacoob" />
+    <Greet name="Khan" /> */}
+
   </View>
 }
