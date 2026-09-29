@@ -6,10 +6,10 @@ import { Background } from 'expo-router/build/react-navigation';
 export default function App(){
   return(
     <View style={styles.container}>
-        <Box style={{backgroundColor:"#8e9b00"}}>Box 1</Box>
+        <Box style={{backgroundColor:"#8e9b00", top:200, left:200,position:"absolute"}}>Box 1</Box>
         <Box style={{backgroundColor:"#b65d1f"}}>Box 2</Box>
-        <Box style={{backgroundColor:"#1c4c56", flexGrow:1}}>Box3</Box>
-        <Box style={{backgroundColor:"#ab9156",flexGrow:2}}>Box4</Box>
+        <Box style={{backgroundColor:"#1c4c56"}}>Box3</Box>
+        <Box style={{backgroundColor:"#ab9156", top:100, left:100, position:"relative"}}>Box4</Box>
         <Box style={{backgroundColor:"#6b0803"}}>Box5</Box>
         <Box style={{backgroundColor:"#1c4c56"}}>Box6</Box>
         <Box style={{backgroundColor:"#b95f21"}}>Box7</Box>
