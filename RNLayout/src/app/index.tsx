@@ -8,8 +8,8 @@ export default function App(){
     <View style={styles.container}>
         <Box style={{backgroundColor:"#8e9b00"}}>Box1</Box>
         <Box style={{backgroundColor:"#b65d1f"}}>Box2</Box>
-        <Box style={{backgroundColor:"#1c4c56"}}>Box3</Box>
-        <Box style={{backgroundColor:"#ab9156"}}>Box4</Box>
+        <Box style={{backgroundColor:"#1c4c56", flexBasis:140,flex:1}}>Box3</Box>
+        <Box style={{backgroundColor:"#ab9156",height:140,flex:1}}>Box4</Box>
         <Box style={{backgroundColor:"#6b0803"}}>Box5</Box>
         <Box style={{backgroundColor:"#1c4c56"}}>Box6</Box>
         <Box style={{backgroundColor:"#b95f21"}}>Box7</Box>
@@ -19,12 +19,10 @@ export default function App(){
 
 const styles = StyleSheet.create({
     container:{
-        height:300,
+      flex:1,
         // flexDirection:"row",
         // columnGap:30,
         // rowGap:20,
-        gap:10,
-        flexWrap:"wrap",
         marginTop:64,
         borderWidth:6,
         borderColor:"red",
