@@ -1,4 +1,5 @@
-import {View, Text,StyleSheet,useWindowDimensions} from 'react-native';
+import {View, Text,StyleSheet, useWindowDimensions} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState, useEffect } from 'react';
 
 
@@ -11,27 +12,37 @@ export default function App(){
   // useEffect(() =>{
   //   const subscription = Dimensions.addEventListener("change", ({window}) =>{
   //     setDimensions({window});
-  //   });
+
+  //      console.log({
+  //         dimensionWidth: window.width,
+  //         dimensioHeight: window.height,
+  //       });
+  //     });
   //   return () => subscription?.remove();
-  // })
+  // },[])
 
   // const {window} = dimensions;
-  // const dimensionWidth = window.width;
-  // const dimensioHeight = window.height;
+
+  //WINDOW DIMENSION HOOK
 
   const windowDimensionWidth = useWindowDimensions().width;
   const windowDimensionHeight = useWindowDimensions().height;
 
   console.log({windowDimensionWidth, windowDimensionHeight})
   return( 
-    <View style={styles.container}>
-      <View style={[styles.box, {height: windowDimensionHeight > 600 ? "60%" : "90%", width: windowDimensionWidth > 500 ? "70%" : "90%",}]}>
-             <Text style={{fontSize: windowDimensionWidth > 500 ? 50 : 24 }}>
-                Welcome !
+    <SafeAreaView style={styles.SafeContainer}>
+
+          <View style={styles.container}>
+            <View style={[styles.box]}>
+              <Text style={styles.text}>
+                  Welcome !
               </Text>
-      </View>
-       
-    </View>
+            </View>
+                
+          </View>
+
+    </SafeAreaView>
+
   )
 }
 
@@ -44,15 +55,23 @@ export default function App(){
 
 
 const styles = StyleSheet.create({
+  SafeContainer:{
+     flex:1,
+     backgroundColor:"plum",
+  },
   container:{
-    flex:1,
-    backgroundColor:"plum",
-    justifyContent:"center",
-    alignItems:"center",
+      flex:1,
+      backgroundColor:"plum",
   },
   box:{
-    backgroundColor:"lightblue",
-    justifyContent:"center",
-    alignItems:"center",
+    // backgroundColor:"lightblue",
+    // justifyContent:"center",
+    // alignItems:"center",
+    padding:20,
   },
+  text:{
+    fontSize:20,
+    fontWeight:"bold",
+    textAlign:"center"
+  }
 })
