@@ -1,5 +1,6 @@
-import {View, Text,StyleSheet, useWindowDimensions} from 'react-native';
+import {View, Text,StyleSheet, Platform} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import CustomButton from '../../components/CustomButton/CustomButton';
 import { useState, useEffect } from 'react';
 
 
@@ -25,10 +26,10 @@ export default function App(){
 
   //WINDOW DIMENSION HOOK
 
-  const windowDimensionWidth = useWindowDimensions().width;
-  const windowDimensionHeight = useWindowDimensions().height;
+  // const windowDimensionWidth = useWindowDimensions().width;
+  // const windowDimensionHeight = useWindowDimensions().height;
 
-  console.log({windowDimensionWidth, windowDimensionHeight})
+  // console.log({windowDimensionWidth, windowDimensionHeight})
   return( 
     <SafeAreaView style={styles.SafeContainer}>
 
@@ -37,6 +38,7 @@ export default function App(){
               <Text style={styles.text}>
                   Welcome !
               </Text>
+              <CustomButton title="Click Me" onPress={() => alert("Clicked!!")} />
             </View>
                 
           </View>
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
   },
   container:{
       flex:1,
-      backgroundColor:"plum",
+      backgroundColor:Platform.OS === 'android' ? "black" : "purple",
   },
   box:{
     // backgroundColor:"lightblue",
@@ -70,8 +72,18 @@ const styles = StyleSheet.create({
     padding:20,
   },
   text:{
-    fontSize:20,
+    ...Platform.select({
+      ios:{
+        color:"purple",
+        fontSize:30,
+      },
+      android:{
+        color:"green",
+        fontSize:30,
+        fontStyle:"italic",
+      },
+    }),
     fontWeight:"bold",
-    textAlign:"center"
+    textAlign:"center",
   }
 })
