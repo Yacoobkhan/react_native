@@ -1,5 +1,6 @@
-import {View,Text,StyleSheet,ScrollView,StatusBar,FlatList} from 'react-native';
+import {View,Text,StyleSheet,ScrollView,StatusBar,FlatList,SectionList} from 'react-native';
 import PokemonList from '../../data.json';
+import groupedPokemonData from '../../grouped-data.json';
 
 export default function App(){
   return(
@@ -16,7 +17,7 @@ export default function App(){
       </ScrollView> */}
 
 
-      <FlatList data={PokemonList} 
+      {/* <FlatList data={PokemonList} 
           
           renderItem={({item}) =>{
             console.log(item.id)
@@ -36,7 +37,33 @@ export default function App(){
           ListHeaderComponent={<Text style={styles.listHeader}>Pokemon List</Text>}
           ListFooterComponent={<Text style={styles.listFooter}>End of List</Text>}
 
+      /> */}
+
+      <SectionList style={styles.ScrollView}
+          sections={groupedPokemonData}
+          renderItem={({item}) => {
+            return(
+              <View style={styles.card}>
+                <Text style={styles.cardText}>{item}</Text>
+              </View>
+            )
+          }}
+
+          renderSectionHeader = { ({section}) => {
+              return(
+                <Text style={styles.cardText}>{section.type}</Text>
+              )
+          }}
+
+
+          ItemSeparatorComponent={<View style={{height:16}}/>}
+          SectionSeparatorComponent={<View style={{height:16}}/>}
+      
+      
       />
+
+
+
      </View>
   )
 }
