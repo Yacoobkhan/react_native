@@ -16,7 +16,7 @@ export default function App(){
       </ScrollView> */}
 
 
-      <FlatList data={[]} 
+      <FlatList data={PokemonList} 
           
           renderItem={({item}) =>{
             console.log(item.id)
@@ -33,6 +33,9 @@ export default function App(){
           keyExtractor={(item) => item.id.toString()}
           ItemSeparatorComponent={<View style={{height:16}}/>}
           ListEmptyComponent={<Text style={styles.itemsText}>No items Found</Text>}
+          ListHeaderComponent={<Text style={styles.listHeader}>Pokemon List</Text>}
+          ListFooterComponent={<Text style={styles.listFooter}>End of List</Text>}
+
       />
      </View>
   )
@@ -63,5 +66,19 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     textAlign:"center",
     color:"red",
-  }
+  },
+  listHeader:{
+    color:"blue",
+    fontSize:24,
+    fontWeight:"bold",
+    textAlign:"center",
+    marginBottom:12,
+  },
+  listFooter:{
+    fontSize:24,
+    fontWeight:"bold",
+    color:"red",
+    textAlign:"center",
+    marginTop:16,
+  },
 })
