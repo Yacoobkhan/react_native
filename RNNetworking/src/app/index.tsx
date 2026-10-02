@@ -1,98 +1,106 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import {View,Text,StyleSheet,StatusBar,FlatList,ActivityIndicator} from 'react-native';
+import { useState,useEffect } from 'react';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
+export default function App(){
+
+  type Post = {
+      userId : number,
+      id: number,
+      title:String,
+      body: String,
   }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
+
+  const [postList, SetPostList] = useState<Post[]>([]);
+  const [isLoading,setIsLoading] = useState(true);
+  const fetchData = async(limit=10) => {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`);
+
+    const data = await response.json();
+    SetPostList(data);
+    setIsLoading(false);
   }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-  return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+  useEffect(() => {
+    fetchData();
+  },[])
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
+  if(isLoading){
+    return(
+      <SafeAreaView style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="0000ff" />
+        <Text>Loading...</Text>
       </SafeAreaView>
-    </ThemedView>
-  );
+    )
+  }
+
+  return(
+      <SafeAreaView style={styles.container}>
+            <View style={styles.listContainer}>
+                <FlatList 
+                  data={postList}
+                  renderItem = {({item}) => {
+                    return(
+                      <View style={styles.card}>
+                        <Text style={styles.titleText}>{item.title}</Text>
+                        <Text style={styles.bodyText}>{item.body}</Text>
+                      </View>
+                    )
+                  }}
+
+                  ItemSeparatorComponent={()=>(
+                    <View style={{height:16}}/>
+                  )}
+
+                  ListEmptyComponent={<Text style={styles.bodyText}>No Posts Found</Text>}
+                  ListHeaderComponent={<Text style={styles.headerText}>Post List</Text>}
+                  ListFooterComponent={<Text style={styles.footerText}>End of List</Text>}
+                />
+        </View>
+        
+      </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+  container:{
+    flex:1,
+    backgroundColor:"#f5f5f5",
+    paddingTop: StatusBar.currentHeight,
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+  listContainer:{
+    flex:1,
+    paddingHorizontal:16,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  card:{
+    backgroundColor:"white",
+    padding:16,
+    borderRadius:8,
+    borderWidth:1,
   },
-  title: {
-    textAlign: 'center',
+  titleText:{
+    fontSize:30,
   },
-  code: {
-    textTransform: 'uppercase',
+  bodyText:{
+    fontSize:24,
+    color:"#666666",
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  headerText:{
+    fontSize:24,
+    textAlign:"center",
+    marginBottom:12,
   },
-});
+  footerText:{
+    fontSize:24,
+    textAlign:"center",
+    marginTop:12,
+  },
+  loadingContainer:{
+    flex:1,
+    backgroundColor:"white",
+    justifyContent:"center",
+    alignItems:"center",
+  },
+})
